@@ -1,58 +1,59 @@
 # Expense Tracker API
 
-Uma API backend pronta para produção para rastreamento de despesas, construída com Express, PostgreSQL, Prisma, autenticação JWT e documentação Swagger.
+API backend para controle financeiro com autenticação JWT, validação Zod, PostgreSQL e documentação Swagger.
 
-## O que faz
+## Resumo técnico
 
-- Cadastra e autentica usuários com hash seguro de senha
-- Emite tokens JWT de acesso e refresh com suporte a logout
-- Gerencia transações de receita e despesa com filtros e paginação
-- Cria e atualiza categorias de usuário com valores padrão criados automaticamente
-- Oferece resumo financeiro com saldo, totais, métricas mensais e distribuição de despesas por categoria
-- Aplica validação, middleware de segurança, Helmet, CORS e limitação de taxa
+- Autenticação: registro, login, refresh token, logout
+- Usuários: perfil, atualização e exclusão de conta
+- Transações: CRUD de receitas e despesas
+- Categorias: CRUD com categorias padrão por usuário
+- Dashboard: saldo, totais, resumo mensal e percentuais por categoria
+- Segurança: Helmet, CORS, rate limiting e validação de entrada
 
-## Stack tecnológica
+## Tecnologias
 
 - Node.js, Express
 - PostgreSQL, Prisma ORM
 - JWT, bcrypt
-- Validação Zod
-- Documentação Swagger/OpenAPI
-- Suporte Docker
+- Zod
+- Swagger/OpenAPI
+- Docker
 
-## Estrutura
+## Estrutura principal
 
-- `src/controllers` - manipuladores de requisição
-- `src/services` - lógica de negócio
-- `src/repositories` - acesso ao banco com Prisma
-- `src/middlewares` - autenticação e tratamento de erros
+- `src/app.js` - configuração do Express
+- `src/server.js` - servidor HTTP
 - `src/routes` - rotas da API
-- `src/schemas` - regras de validação
-- `src/config` - configuração de ambiente
-- `src/prisma` - esquema e scripts de seed
-- `src/docs` - definição Swagger
+- `src/controllers` - camada de controle
+- `src/services` - regras de negócio
+- `src/repositories` - acesso ao banco de dados
+- `src/middlewares` - autenticação, validação e erros
+- `src/schemas` - validação de payloads
+- `src/prisma` - esquema e seed
+- `src/docs` - especificação Swagger
 
-## Configuração
+## Como executar
 
 1. Clone o repositório:
    ```bash
    git clone https://github.com/Lymm-08/Expense-Tracker-API.git
    cd Expense-Tracker-API
    ```
-2. Instale as dependências:
+2. Instale dependências:
    ```bash
    npm install
    ```
-3. Copie `.env.example` para `.env` e atualize os valores.
+3. Copie `.env.example` para `.env` e configure as variáveis.
 4. Gere o cliente Prisma:
    ```bash
    npm run prisma:generate
    ```
-5. Aplique as migrações:
+5. Execute migrações:
    ```bash
    npm run prisma:migrate
    ```
-6. Inicie a aplicação:
+6. Inicie em modo de desenvolvimento:
    ```bash
    npm run dev
    ```
@@ -71,7 +72,7 @@ RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX=100
 ```
 
-## Rotas
+## Rotas principais
 
 - `POST /api/v1/auth/register`
 - `POST /api/v1/auth/login`
@@ -93,15 +94,11 @@ RATE_LIMIT_MAX=100
 
 ## Documentação
 
-Abra a documentação Swagger após iniciar o servidor:
+A documentação Swagger fica em:
 
 ```bash
 http://localhost:3000/api/v1/docs
 ```
-
-## Demo
-
-> Adicione seu GIF de demonstração aqui para mostrar a API em funcionamento.
 
 ## Testes
 
@@ -116,7 +113,7 @@ docker build -t expense-tracker-api .
 docker run --env-file .env -p 3000:3000 expense-tracker-api
 ```
 
-Ou use Docker Compose:
+## Docker Compose
 
 ```bash
 docker compose up --build
