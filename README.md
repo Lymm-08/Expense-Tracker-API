@@ -1,4 +1,4 @@
-# Expense Tracker API
+﻿# Expense Tracker API
 
 A production-ready backend API for expense tracking, built with Express, PostgreSQL, Prisma, JWT authentication, and Swagger documentation.
 
@@ -121,3 +121,4 @@ Or use Docker Compose:
 ```bash
 docker compose up --build
 ```
+e deixa um arquivo n
